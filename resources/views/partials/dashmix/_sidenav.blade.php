@@ -3,7 +3,7 @@
     <div class="content-header justify-content-lg-center">
         <!-- Logo -->
         <a class="link-fx font-size-md text-dual" href="/">
-            <span class="text-white-75">{{ auth()->user()->hasRole('Super Admin') ? 'Super Admin Dashboard': 'Rewards App' }}</span>
+            <span class="text-white-75">{{ auth()->user()->hasRole('Super Admin') ? 'Super Admin Dashboard': 'ICFMPA Admin' }}</span>
         </a>
         <!-- END Logo -->
         <!-- Options -->
