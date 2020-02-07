@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Tango Theaters Rewards App Portal">
-        <meta name="keyword" content="Tango Theaters Rewards App">
+        <meta name="description" content="ICFMPA">
+        <meta name="keyword" content="ICFMPA">
         <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
-        <title>Tango Theaters Rewards App</title>
+        <title>ICFMPA</title>
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
         <link rel="shortcut icon" href="{{url('/favicon.ico')}}">
@@ -34,7 +34,7 @@
                                     <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
                                         <div class="mb-2 text-center">
                                             <a class="link-fx font-w700 font-size-h1" href="{{ route('dashboard') }}">
-                                                <span class="text-dark">Rewards </span><span class="text-primary">App</span>
+                                                <span class="text-dark">ICFMPA </span><span class="text-primary">App</span>
                                             </a>
                                             <p class="text-uppercase font-w700 font-size-sm text-muted">Sign In</p>
                                         </div>
