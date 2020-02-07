@@ -1,0 +1,89 @@
+.required:after { content:"*"; color: #e32;}
+.sidebar-logo{
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/logo.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100px auto;
+}
+.blockUI h1 {
+    color: #ffff !important;
+    margin-bottom: 0 !important;
+    font-size: 1.2rem !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+	color: unset;
+}
+
+.nav-tabs-block, .wizard-nav-tabs {
+    background-color: #495057;
+}
+
+.nav-link {
+    color: #e6ebf4;
+}
+
+.nav-tabs-block .nav-link:focus, .nav-tabs-block .nav-link:hover {
+    color: #000000;
+}
+
+/* Wizard custom css */
+
+.wizard-nav-link {
+    color: #e6ebf4;
+}
+
+.wizard-nav-tabs .nav-link:focus, .wizard-nav-tabs .nav-link:hover {
+    color: #e6ebf4;
+    cursor: default;
+    background-color: #495057;
+}
+
+.bigHr{
+    background-color: dimgrey !important;
+    color: dimgrey !important;
+    border-top: solid 10px solid dimgrey !important;
+    height: 5px !important;
+    width: 100% !important;
+}
+
+/* Modals */
+
+.modal-dialog{
+    overflow-y: initial !important;
+}
+
+.modal-body{
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal-lg{
+    max-width: 80% !important;
+}
+
+.modal.show {
+    overflow: scroll;
+}
+
+.js-datepicker{
+    z-index: 1060 !important;
+}
+
+.old.day{
+    color: #969696 !important;
+}
+
+.new.day{
+    color: #969696 !important;
+}
+
+.disabled.day{
+    color: #D3D3D3 !important;
+}
+
+#keyword_search_modal {
+    z-index: 1080 !important;
+}
