@@ -7,7 +7,7 @@
         <meta name="description" content="Tango Theaters Rewards App Portal">
         <meta name="keyword" content="Tango Theaters Rewards App">
         <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
-        <title>Tango Theatres Rewards App</title>
+        <title>Tango Theaters Rewards App</title>
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
         <link rel="shortcut icon" href="{{url('/favicon.ico')}}">
@@ -26,15 +26,15 @@
     <body>
         <div id="page-container">
             <main id="main-container">
-                <div class="row no-gutters justify-content-center" style="background-color: #12145f;">
+                <div class="row no-gutters justify-content-center bg-body-dark">
                     <div class="hero-static col-sm-11 col-md-9 col-xl-7 d-flex align-items-center p-2 px-sm-0">
-                        <div class="block block-rounded block-transparent block-fx-shadow w-100 mb-0">
+                        <div class="block block-rounded block-transparent block-fx-pop w-100 mb-0 overflow-hidden bg-image" style="background-image: url('media/photos/photo20@2x.jpg')">
                             <div class="row no-gutters">
                                 <div class="col-md-6 order-md-1 bg-white">
                                     <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
                                         <div class="mb-2 text-center">
                                             <a class="link-fx font-w700 font-size-h1" href="{{ route('dashboard') }}">
-                                                <span class="text-dark">Rewards </span><span class="text-primary">Admin Login</span>
+                                                <span class="text-dark">Rewards </span><span class="text-primary">App</span>
                                             </a>
                                             <p class="text-uppercase font-w700 font-size-sm text-muted">Sign In</p>
                                         </div>
@@ -59,8 +59,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="col-md-6 order-md-0 bg-black-50 align-items-center d-none d-lg-flex">
-                                    <img src="{{ asset('img/android_app/idm-2.jpg') }}" alt="" class="img-fluid">
+                                <div class="col-md-6 order-md-0 bg-black-50 d-flex align-items-center">
                                 </div>
                             </div>
                         </div>
