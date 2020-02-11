@@ -13,7 +13,7 @@
                 	@yield('content')
                 </div>
             </main>
-            @include('partials.dashmix._footer')
+            {{-- @include('partials.dashmix._footer') --}}
         </div>
         @include('partials.dashmix._javascript')
         @include('partials.dashmix._helper')
