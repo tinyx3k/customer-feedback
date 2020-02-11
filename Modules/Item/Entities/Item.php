@@ -24,6 +24,6 @@ class Item extends Model
 
     public function expressions()
     {
-        return $this->hasMany('App\Expressions', 'item_id');
+        return $this->hasMany('App\Expression', 'item_id');
     }
 }

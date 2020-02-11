@@ -125,6 +125,27 @@ class ItemController extends Controller
     public function showExpression($id)
     {
         $item = Item::find($id);
-        return view('item::dominant', compact('item'));
+        $expressions = $item->expressions;
+        $exp_arr = [
+            'Neutral' => $expressions->avg('neutral_score'),
+            'Happy' => $expressions->avg('happy_score'),
+            'Sad' => $expressions->avg('sad_score'),
+            'Angry' => $expressions->avg('angry_score'),
+            'Fearful' => $expressions->avg('fearful_score'),
+            'Disgusted' => $expressions->avg('disgusted_score'),
+            'Surprised' => $expressions->avg('surprised_score'),
+        ];
+        $dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
+        return view('item::dominant', compact('item', 'dominant'));
+    }
+
+    private function getClosest($search, $arr){
+        $closest = null;
+        foreach ($arr as $item) {
+            if ($closest === null || abs($search - $closest) > abs($item - $search)) {
+                $closest = $item;
+            }
+        }
+        return $closest;
     }
 }
