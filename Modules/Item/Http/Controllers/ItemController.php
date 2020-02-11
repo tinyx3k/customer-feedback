@@ -136,7 +136,6 @@ class ItemController extends Controller
             'Surprised' => $expressions->avg('surprised_score'),
         ];
         $dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
-        dd($dominant);
         return view('item::dominant', compact('item', 'dominant'));
     }
 
