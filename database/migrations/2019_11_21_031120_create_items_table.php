@@ -18,8 +18,6 @@ class CreateItemsTable extends Migration
             $table->string('name')->nullable();
             $table->longText('image')->nullable();
             $table->string('price')->nullable();
-            $table->string('points')->nullable();
-            $table->string('points_price')->nullable();
             $table->timestamps();
         });
     }

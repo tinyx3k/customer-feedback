@@ -20,33 +20,8 @@
                                     <input type="text" class="form-control" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Item Type</label>
-                                    <select name="item_type" id="item_type" class="form-control" required>
-                                        <option value="Single">Single</option>
-                                        <option value="Combo">Combo</option>
-                                    </select>
-                                </div>
-                                <div class="form-group" id="items_container" disabled="disabled" hidden="hidden">
-                                    <label>Select Items in Combo</label>
-                                    <select name="items_combo[]" id="items_combo" multiple class="form-control" style="width: 100%">
-                                        @forelse($items as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @empty
-                                        <option value="" selected disabled>No items available</option>
-                                        @endforelse
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Equivalent Points</label>
-                                    <input type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="points" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Redeem Points Price</label>
-                                    <input type="number" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="points_price" required>
-                                </div>
-                                <div class="form-group">
                                     <label>Actual Item Price</label>
-                                    <input type="text" class="form-control" name="price">
+                                    <input type="text" class="form-control" name="price" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="form-group">
                                     <label>Item Image</label>

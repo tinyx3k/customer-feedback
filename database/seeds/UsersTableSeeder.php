@@ -25,20 +25,5 @@ class UsersTableSeeder extends Seeder
         $admin->password = bcrypt('admin');
         $admin->save();
         $admin->roles()->attach($role_admin);
-
-        $role_customer = Role::where('name', 'Customer')->first();
-
-        $customer = new User();
-        $customer->first_name = 'Johnny';
-        $customer->last_name = 'Doe';
-        $customer->email = 'johnnydoe@email.com';
-        $customer->username = 'johnnydoe@email.com';
-        $customer->password = bcrypt('password');
-        $customer->qr_data = 'TANGO_001';
-        $customer->save();
-        $customer->roles()->attach($role_customer);
-
-        $point = new Point(['points' => 1000]);
-        $customer->points()->save($point);
     }
 }

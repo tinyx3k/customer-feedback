@@ -15,9 +15,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Equivalent Points</th>
-                                <th>Redeem Price</th>
-                                <th>Actual Price</th>
+                                <th>Price</th>
                                 <th width="1%">Image</th>
                                 <th>Actions</th>
                             </tr>
@@ -25,12 +23,11 @@
                         <tbody>
                             @foreach($items as $item)
                             <tr>
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->points}} PTS</td>
-                                <td>{{$item->points_price}} PTS</td>
-                                <td>$ {{$item->price}}</td>
+                                <td><a href="{{ route('item.show', $item->id) }}">{{$item->name}}</a></td>
+                                <td>PHP {{$item->price}}</td>
                                 <td><img src="{{ asset('/') .'img/item_images/'. $item->image }}" alt="{{ $item->name }}" class="img-fluid"></td>
                                 <td class="text-center">
+                                    <a href="{{ route('item.show-expressions', $item->id) }}" class="btn btn-success"><i class="fa fa-chart-bar mr-1"></i>View Dominant Expression</a>
                                     <a href="{{ route('item.edit', $item->id) }}" class="btn btn-warning"><i class="fa fa-pencil-alt mr-1"></i>Edit</a>
                                     <a href="javascript:void(0)" class="btn btn-danger btn-delete" data-id="{{$item->id}}"><i class="fa fa-trash mr-1"></i>Delete</a>
                                     <form id="form-delete-{{$item->id}}" method="post" action="{{ route('item.destroy', $item->id) }}">

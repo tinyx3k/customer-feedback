@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Modules\Item\Interfaces\ItemRepositoryInterface;
 use DB;
 use Modules\Item\Entities\Item;
+use App\Expression;
 
 class ItemController extends Controller
 {
@@ -34,9 +35,6 @@ class ItemController extends Controller
         $filename = time().'.'.$request->file('item_image')->getClientOriginalExtension();
         $request->file('item_image')->move(public_path().'/img/item_images/', $filename);
         $data['image'] = $filename;
-        if(array_key_exists('items_combo', $data)){
-            $data['items_combo'] = implode(';', $data['items_combo']);
-        }
         try {
             DB::beginTransaction();
             $this->item_repository->create($data);
@@ -54,18 +52,13 @@ class ItemController extends Controller
 
     public function show($id)
     {
-        //
+        $item = Item::find($id);
+        return view('item::show', compact('item'));
     }
 
     public function edit($id)
     {
         $item = $this->item_repository->findById($id);
-        $items_content = [];
-        if($item->item_type == 'Combo')
-        {
-            $items_content = $item->comboItems();
-        }
-        $items = Item::where('item_type', 'Single')->get();
         if (empty($item)) {
             return redirect()->route('item.index')->with('error', 'Item does not exist.');
         }
@@ -75,9 +68,6 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        if(array_key_exists('items_combo', $data)){
-            $data['items_combo'] = implode(';', $data['items_combo']);
-        }
         if($request->hasFile('item_image')){
             $filename = time().'.'.$request->file('item_image')->getClientOriginalExtension();
             $request->file('item_image')->move(public_path().'/img/item_images/', $filename);
@@ -112,5 +102,29 @@ class ItemController extends Controller
             DB::rollBack();
         }
         return redirect()->route('item.index')->with($status, $message);
+    }
+
+    public function expression(Request $request)
+    {
+        $data = $request->all();
+        try {
+            DB::beginTransaction();
+            Expression::create($data);
+            DB::commit();
+            $status = 'success';
+            $message = 'Successfully collected expressions!';
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $status = 'error';
+            $message = $e->getMessage();
+        }
+
+        return redirect()->route('item.index')->with($status, $message);
+    }
+
+    public function showExpression($id)
+    {
+        $item = Item::find($id);
+        return view('item::dominant', compact('item'));
     }
 }

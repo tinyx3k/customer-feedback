@@ -16,17 +16,9 @@ class RolesTableSeeder extends Seeder
         $super_admin->name = 'Super Admin';
         $super_admin->save();
 
-        $customer = new Role();
-        $customer->name = 'Customer';
-        $customer->save();
-
         $cashier = new Role();
         $cashier->name = 'Cashier';
         $cashier->save();
-
-        $admin = new Role();
-        $admin->name = 'Admin';
-        $admin->save();
 
     }
 }

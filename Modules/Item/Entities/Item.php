@@ -22,23 +22,8 @@ class Item extends Model
         'item_type',
     ];
 
-    public function comboItems()
+    public function expressions()
     {
-    	$items_array = explode(';', $this->items_combo);
-    	$items = [];
-    	foreach ($items_array as $v) {
-    		$items[] = $this->find($v)->id;
-    	}
-    	return $items;
-    }
-
-    public function comboItemsName()
-    {
-    	$items_array = explode(';', $this->items_combo);
-    	$items = [];
-    	foreach ($items_array as $v) {
-    		$items[] = $this->find($v);
-    	}
-    	return $items;
+        return $this->hasMany('App\Expressions', 'item_id');
     }
 }

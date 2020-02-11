@@ -97,32 +97,6 @@
                     @endability
                 </ul>
             </li>
-            <li class="nav-main-item">
-                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                    <i class="nav-main-link-icon si si-bar-chart"></i>
-                    <span class="nav-main-link-name">Records/Reports</span>
-                </a>
-                <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('customer.report') }}">
-                            <i class="nav-main-link-icon si si-users"></i>
-                            <span class="nav-main-link-name">Customers</span>
-                        </a>
-                    </li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('item.report') }}">
-                            <i class="nav-main-link-icon si si-layers"></i>
-                            <span class="nav-main-link-name">Items</span>
-                        </a>
-                    </li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('redeem.report') }}">
-                            <i class="nav-main-link-icon si si-star"></i>
-                            <span class="nav-main-link-name">Redeems</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
             @endability
             <li class="nav-main-heading">Personal</li>
             <li class="nav-main-item">
@@ -133,10 +107,6 @@
                 <a class="nav-main-link" href="{{ route('change.password') }}">
                     <i class="nav-main-link-icon si si-key"></i>
                     <span class="nav-main-link-name">Change Password</span>
-                </a>
-                <a href="{{ route('profile.image') }}" class="nav-main-link">
-                    <i class="nav-main-link-icon si si-camera"></i>
-                    <span class="nav-main-link-name">Change Profile Image</span>
                 </a>
                 <a class="nav-main-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
