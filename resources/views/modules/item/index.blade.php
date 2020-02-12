@@ -11,6 +11,7 @@
                     </div>
                 </div>
                 <div class="block-content">
+                    <div class="table-responsive">
                     <table class="table table-bordered table-vcenter table-striped table-sm" id="items-table">
                         <thead>
                             <tr>
@@ -39,6 +40,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
