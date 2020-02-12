@@ -4,18 +4,20 @@
 	canvas{
 		position: absolute;
 		left: 0;
-		top: 25%;
+		top: 0;
         margin-left: auto;
         margin-right: auto;
         right: 0;
+        margin-top: auto;
 	}
 	#video{
 		position: absolute;
 		left: 0;
-		top: 25%;
+		top: 0;
         margin-left: auto;
         margin-right: auto;
         right: 0;
+        margin-top: auto;
 	}
 </style>
 <script defer src="{{ asset('js/face-api.min.js') }}"></script>
