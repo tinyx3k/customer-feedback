@@ -39,5 +39,5 @@
 </div>
 @stop
 @section('scripts')
-<video id="video" width="100" height="100" autoplay muted></video>
+<video id="video" width="400" height="300" autoplay muted></video>
 @stop
