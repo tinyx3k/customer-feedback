@@ -136,7 +136,20 @@ class ItemController extends Controller
             'Surprised' => $expressions->avg('surprised_score'),
         ];
         $dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
-        return view('item::dominant', compact('item', 'dominant'));
+        foreach ($expressions as $expression) {
+            $single_exp_arr = [
+                'Neutral' => $expression->neutral_score,
+                'Happy' => $expression->happy_score,
+                'Sad' => $expression->sad_score,
+                'Angry' => $expression->angry_score,
+                'Fearful' => $expression->fearful_score,
+                'Disgusted' => $expression->disgusted_score,
+                'Surprised' => $expression->surprised_score,
+            ];
+            $dominant_expression = array_search($this->getClosest(1, $single_exp_arr), $single_exp_arr);
+            $expression->dominant = $dominant_expression;
+        }
+        return view('item::dominant', compact('item', 'dominant', 'expressions'));
     }
 
     private function getClosest($search, $arr){

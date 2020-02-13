@@ -26,7 +26,7 @@
     <div class="row">
     	<div class="col-lg-12 text-center">
     		<h3 class="content-heading">{{ $item->name }}</h3>
-    		<form action="{{ route('item.expression') }}" method="POST">
+    		<form action="{{ route('item.expression') }}" id="exp-form" method="POST">
     			@csrf
     			<input type="hidden" name="item_id" value="{{$item->id}}">
     			<input type="hidden" id="neutral_score" name="neutral_score" required>
@@ -36,9 +36,11 @@
     			<input type="hidden" id="fearful_score" name="fearful_score" required>
     			<input type="hidden" id="disgusted_score" name="disgusted_score" required>
     			<input type="hidden" id="surprised_score" name="surprised_score" required>
-    			<div class="form-group">
-    				<button type="submit" class="btn btn-lg btn-success">Get Expression for {{ $item->name }}</button>
-    			</div>
+    			<div class="video-options">
+                    <select name="" id="vid-id" class="custom-select">
+                        <option value="">Select camera</option>
+                    </select>
+                </div>
     		</form>
     	</div>
     </div>

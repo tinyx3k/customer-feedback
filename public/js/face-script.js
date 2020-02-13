@@ -1,24 +1,22 @@
 const video = document.getElementById('video');
+const cameraOptions = document.querySelector('.video-options>select');
+let currentStream;
+
+function stopMediaTracks(stream) {
+    stream.getTracks().forEach(track => {
+        track.stop();
+    });
+}
 
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
     faceapi.nets.faceExpressionNet.loadFromUri('/models')
-]).then(startVideo);
+]);
 
 function startVideo() {
-    if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({
-                video: true
-            })
-            .then(function(stream) {
-                video.srcObject = stream;
-            })
-            .catch(function(err0r) {
-                console.log("Something went wrong!");
-            });
-    }
+
 }
 
 video.addEventListener('playing', () => {
@@ -44,5 +42,47 @@ video.addEventListener('playing', () => {
         document.getElementById('fearful_score').value = arrExp.fearful;
         document.getElementById('disgusted_score').value = arrExp.disgusted;
         document.getElementById('surprised_score').value = arrExp.surprised;
+        if (typeof resizedDetections[0].expressions !== 'undefined') {
+            $('#exp-form').submit();
+        }
     }, 500)
 });
+
+async function getDevices() {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    console.log(devices);
+    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+    const options = videoDevices.map(videoDevice => {
+        return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
+    });
+    cameraOptions.innerHTML = options.join('');
+}
+
+getDevices();
+
+$('#vid-id').on('change', function() {
+    if (typeof currentStream !== 'undefined') {
+        stopMediaTracks(currentStream);
+    }
+    const videoConstraints = {};
+    if (document.getElementById('vid-id').value === '') {
+        videoConstraints.facingMode = 'environment';
+    } else {
+        videoConstraints.deviceId = {
+            exact: document.getElementById('vid-id').value
+        };
+    }
+
+    const constraints = {
+        video: videoConstraints,
+        audio: false
+    }
+
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then(stream => {
+            currentStream = stream;
+            video.srcObject = stream;
+            return navigator.mediaDevices.enumerateDevices();
+        })
+        .then(getDevices());
+})
