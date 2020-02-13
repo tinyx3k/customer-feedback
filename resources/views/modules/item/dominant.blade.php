@@ -16,7 +16,7 @@
     			<tbody>
     				@forelse($expressions as $expression)
 					<tr>
-						<td>{{ $expression->created_at }}</td>
+						<td>{{ date('Y-m-d H:i:s', strtotime($expression->created_at)+28800) }}</td>
 						<td>{{ $expression->dominant }}</td>
 					</tr>
 					@empty
