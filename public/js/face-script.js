@@ -15,10 +15,6 @@ Promise.all([
     faceapi.nets.faceExpressionNet.loadFromUri('/models')
 ]);
 
-function startVideo() {
-
-}
-
 video.addEventListener('playing', () => {
     const canvas = faceapi.createCanvasFromMedia(video);
     document.body.append(canvas);
@@ -56,11 +52,16 @@ async function getDevices() {
         return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
     });
     cameraOptions.innerHTML = options.join('');
+    startVideo();
 }
 
 getDevices();
 
 $('#vid-id').on('change', function() {
+    startVideo();
+})
+
+function startVideo() {
     if (typeof currentStream !== 'undefined') {
         stopMediaTracks(currentStream);
     }
@@ -83,6 +84,5 @@ $('#vid-id').on('change', function() {
             currentStream = stream;
             video.srcObject = stream;
             return navigator.mediaDevices.enumerateDevices();
-        })
-        .then(getDevices());
-})
+        });
+}
