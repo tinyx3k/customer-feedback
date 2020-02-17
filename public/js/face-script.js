@@ -65,7 +65,16 @@ function startVideo() {
     if (typeof currentStream !== 'undefined') {
         stopMediaTracks(currentStream);
     }
-    const videoConstraints = {};
+    const videoConstraints = {
+        video: {
+            width: {
+                exact: 640
+            },
+            height: {
+                exact: 480
+            }
+        }
+    };
     if (document.getElementById('vid-id').value === '') {
         videoConstraints.facingMode = 'environment';
     } else {
