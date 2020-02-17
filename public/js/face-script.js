@@ -38,15 +38,14 @@ video.addEventListener('playing', () => {
         document.getElementById('fearful_score').value = arrExp.fearful;
         document.getElementById('disgusted_score').value = arrExp.disgusted;
         document.getElementById('surprised_score').value = arrExp.surprised;
-        if (typeof resizedDetections[0].expressions !== 'undefined') {
-            $('#exp-form').submit();
-        }
+        // if (typeof resizedDetections[0].expressions !== 'undefined') {
+        //     $('#exp-form').submit();
+        // }
     }, 500)
 });
 
 async function getDevices() {
     const devices = await navigator.mediaDevices.enumerateDevices();
-    console.log(devices);
     const videoDevices = devices.filter(device => device.kind === 'videoinput');
     const options = videoDevices.map(videoDevice => {
         return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
@@ -62,18 +61,18 @@ $('#vid-id').on('change', function() {
 })
 
 function startVideo() {
-    alert('video started');
     if (typeof currentStream !== 'undefined') {
         stopMediaTracks(currentStream);
     }
     const videoConstraints = {
+        frameRate: 2,
         video: {
             width: {
-                exact: 640
+                exact: 320
             },
             height: {
-                exact: 480
-            }
+                exact: 240
+            },
         }
     };
     if (document.getElementById('vid-id').value === '') {
@@ -83,14 +82,14 @@ function startVideo() {
             exact: document.getElementById('vid-id').value
         };
     }
-
     const constraints = {
         video: videoConstraints,
         audio: false
     }
-
+    console.log(navigator.mediaDevices.getUserMedia(constraints))
     navigator.mediaDevices.getUserMedia(constraints)
         .then(stream => {
+            console.log(stream);
             currentStream = stream;
             video.srcObject = stream;
             return navigator.mediaDevices.enumerateDevices();
