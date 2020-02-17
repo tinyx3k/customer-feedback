@@ -62,6 +62,7 @@ $('#vid-id').on('change', function() {
 })
 
 function startVideo() {
+    alert('video started');
     if (typeof currentStream !== 'undefined') {
         stopMediaTracks(currentStream);
     }
