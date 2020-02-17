@@ -38,9 +38,9 @@ video.addEventListener('playing', () => {
         document.getElementById('fearful_score').value = arrExp.fearful;
         document.getElementById('disgusted_score').value = arrExp.disgusted;
         document.getElementById('surprised_score').value = arrExp.surprised;
-        // if (typeof resizedDetections[0].expressions !== 'undefined') {
-        //     $('#exp-form').submit();
-        // }
+        if (typeof resizedDetections[0].expressions !== 'undefined') {
+            $('#exp-form').submit();
+        }
     }, 500)
 });
 
