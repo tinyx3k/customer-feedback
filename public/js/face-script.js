@@ -65,7 +65,7 @@ function startVideo() {
         stopMediaTracks(currentStream);
     }
     const videoConstraints = {
-        frameRate: 2,
+        frameRate: 24,
         video: {
             width: {
                 exact: 320
