@@ -4,8 +4,8 @@
 </style>
 @endsection
 @section('content')
-<h3 class="content-heading text-center font-w700">PELASE SELECT THE PRODUCT YOU ORDERED BELOW</h3>
-<div class="row">
+<h3 class="content-heading text-center font-w700 m-0 p-0">PELASE SELECT THE PRODUCT YOU ORDERED BELOW</h3>
+<div class="row justify-content-center">
     @foreach($items as $item)
     <div class="col-6 col-lg-4 col-md-4">
         <a href="{{ route('item.question', $item->id) }}" class="block block-rounded block-fx-shadow block-bordered text-center bg-primary-op">
