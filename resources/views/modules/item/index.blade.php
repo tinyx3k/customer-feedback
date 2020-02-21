@@ -24,7 +24,7 @@
                         <tbody>
                             @foreach($items as $item)
                             <tr>
-                                <td><a href="{{ route('item.show', $item->id) }}">{{$item->name}}</a></td>
+                                <td><a href="{{ route('item.show-expressions', $item->id) }}">{{$item->name}}</a></td>
                                 <td>PHP {{$item->price}}</td>
                                 <td><img src="{{ asset('/') .'img/item_images/'. $item->image }}" alt="{{ $item->name }}" class="img-fluid"></td>
                                 <td class="text-center">

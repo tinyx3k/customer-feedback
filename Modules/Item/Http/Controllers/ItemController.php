@@ -23,6 +23,7 @@ class ItemController extends Controller
         $items = $this->item_repository->all();
         return view('item::index', compact('items'));
     }
+
     public function create()
     {
         $items = Item::get();
@@ -119,7 +120,7 @@ class ItemController extends Controller
             $message = $e->getMessage();
         }
 
-        return redirect()->route('item.index')->with($status, $message);
+        return redirect()->route('item.menu')->with($status, $message);
     }
 
     public function showExpression($id)
@@ -160,5 +161,17 @@ class ItemController extends Controller
             }
         }
         return $closest;
+    }
+
+    public function menu()
+    {
+        $items = $this->item_repository->all();
+        return view('item::dashboard-items', compact('items'));
+    }
+
+    public function question($id)
+    {
+        $item = Item::find($id);
+        return view('item::question', compact('item'));
     }
 }

@@ -16,12 +16,16 @@ Promise.all([
 ]);
 
 video.addEventListener('playing', () => {
+    const rect = video.getBoundingClientRect();
     const canvas = faceapi.createCanvasFromMedia(video);
     document.body.append(canvas);
     const displaySize = {
         width: video.width,
         height: video.height
     };
+    console.log(rect);
+    canvas.style.top = rect.top;
+    canvas.style.left = rect.left;
     faceapi.matchDimensions(canvas, displaySize);
     setInterval(async() => {
         const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
@@ -86,10 +90,8 @@ function startVideo() {
         video: videoConstraints,
         audio: false
     }
-    console.log(navigator.mediaDevices.getUserMedia(constraints))
     navigator.mediaDevices.getUserMedia(constraints)
         .then(stream => {
-            console.log(stream);
             currentStream = stream;
             video.srcObject = stream;
             return navigator.mediaDevices.enumerateDevices();
