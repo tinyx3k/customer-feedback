@@ -11874,6 +11874,11 @@ a.block.block-themed .btn-block-option:focus,
   height: 128px;
 }
 
+.img-avatar300 {
+  width: 300px;
+  height: 300px;
+}
+
 .img-avatar-thumb {
   margin: .25rem;
   box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.3);

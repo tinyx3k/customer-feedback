@@ -19,7 +19,7 @@
 <!-- Stylesheets -->
 <!-- Fonts and Dashmix framework -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700">
-<link rel="stylesheet" id="css-main" href="{{url('css/dashmix.min.css')}}">
+<link rel="stylesheet" id="css-main" href="{{url('css/dashmix.css')}}">
         <link rel="stylesheet" id="css-main" href="{{url('css/themes/xinspire.min.css')}}">
 <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">

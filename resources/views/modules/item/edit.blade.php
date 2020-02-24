@@ -1,6 +1,5 @@
 @extends('layouts.dashmix')
 @section('style')
-<link rel="stylesheet" href="{{asset('js/plugins/select2/css/select2.min.css')}}">
 @stop
 @section('content')
 <div class="container-fluid">
@@ -24,6 +23,16 @@
                                     <input type="text" class="form-control" name="name" value="{{ $item->name }}" required>
                                 </div>
                                 <div class="form-group">
+                                    <label>Category</label>
+                                    <select name="category_id" id="category_id" class="form-control" required>
+                                        @forelse($categories as $category)
+                                        <option value="{{ $category->id }}" {{ $category->id == $item->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        @empty
+                                        <option selected disabled>Please add item categories on Categories Page</option>
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label>Actual Item Price</label>
                                     <input type="text" class="form-control" name="price" value="{{ $item->price }}">
                                 </div>
@@ -44,10 +53,4 @@
 </div>
 @stop
 @section('scripts')
-<script src="{{asset('js/plugins/select2/js/select2.min.js')}}"></script>
-@if($item->item_type == 'Combo')
-<script>
-    $('#items_combo').select2();
-</script>
-@endif
 @stop

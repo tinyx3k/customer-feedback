@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Modules\Item\Interfaces\ItemRepositoryInterface;
 use DB;
 use Modules\Item\Entities\Item;
+use Modules\Item\Entities\ItemCategory;
 use App\Expression;
 
 class ItemController extends Controller
@@ -20,14 +21,14 @@ class ItemController extends Controller
 
     public function index()
     {
-        $items = $this->item_repository->all();
-        return view('item::index', compact('items'));
+        $categories = ItemCategory::with(['items'])->get();
+        return view('item::index', compact('categories'));
     }
 
     public function create()
     {
-        $items = Item::get();
-        return view('item::create', compact('items'));
+        $categories = ItemCategory::get();
+        return view('item::create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -60,10 +61,11 @@ class ItemController extends Controller
     public function edit($id)
     {
         $item = $this->item_repository->findById($id);
+        $categories = ItemCategory::get();
         if (empty($item)) {
             return redirect()->route('item.index')->with('error', 'Item does not exist.');
         }
-        return view('item::edit', compact('item', 'items', 'items_content'));
+        return view('item::edit', compact('item', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -165,8 +167,8 @@ class ItemController extends Controller
 
     public function menu()
     {
-        $items = $this->item_repository->all();
-        return view('item::dashboard-items', compact('items'));
+        $categories = ItemCategory::with(['items'])->get();
+        return view('item::menu', compact('categories'));
     }
 
     public function question($id)

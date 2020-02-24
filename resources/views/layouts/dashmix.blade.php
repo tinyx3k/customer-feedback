@@ -7,7 +7,7 @@
         <div id="page-container" class="enable-page-overlay {{config('dashmix.sidenav')}} {{config('dashmix.side-scroll')}} {{config('dashmix.header')}} {{config('dashmix.header-style')}} {{config('dashmix.main-content')}} {{config('dashmix.footer')}}">
             @include('partials.dashmix._sidenav')
             @include('partials.dashmix._nav')
-            <main id="main-container" class="{{ !auth()->user()->hasRole('Super Admin') ? 'bg-primary-op' : ''}}">
+            <main id="main-container">
             {{-- @include('partials.dashmix._breadcrumb') --}}
                 <div class="content">
                 	@yield('content')

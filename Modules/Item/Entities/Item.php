@@ -16,14 +16,16 @@ class Item extends Model
         'name',
         'image',
         'price',
-        'points',
-        'points_price',
-        'items_combo',
-        'item_type',
+        'category_id',
     ];
 
     public function expressions()
     {
         return $this->hasMany('App\Expression', 'item_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('Modules\Item\Category\ItemCategory', 'category_id');
     }
 }

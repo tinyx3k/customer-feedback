@@ -31,7 +31,7 @@
                 </a>
             </li>
             @ability('Super Admin', [])
-            <li class="nav-main-item">
+            {{-- <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                     <i class="nav-main-link-icon si si-users"></i>
                     <span class="nav-main-link-name">User Management</span>
@@ -70,7 +70,7 @@
                     </li>
                     @endability
                 </ul>
-            </li>
+            </li> --}}
             @endability
             @ability('Super Admin', [])
             <li class="nav-main-item">
@@ -100,6 +100,7 @@
             @endability
             <li class="nav-main-heading">Personal</li>
             <li class="nav-main-item">
+                @ability('Super Admin', [])
                 <a class="nav-main-link" href="{{ route('profile') }}">
                     <i class="nav-main-link-icon si si-moustache"></i>
                     <span class="nav-main-link-name">Profile</span>
@@ -108,6 +109,7 @@
                     <i class="nav-main-link-icon si si-key"></i>
                     <span class="nav-main-link-name">Change Password</span>
                 </a>
+                @endability
                 <a class="nav-main-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                     <i class="nav-main-link-icon si si-logout"></i>

@@ -33,9 +33,11 @@
                         </div>
                     </div>
                     <div class="p-2">
+                        @ability('Super Admin', [])
                         <a class="dropdown-item" href="{{ route('profile') }}">
                             <i class="far fa-fw fa-user mr-1"></i> Profile
-                        </a>
+                        </a>      
+                        @endability
                         <!-- END Side Overlay -->
                         @if (Auth::check())
                             <div role="separator" class="dropdown-divider"></div>
