@@ -7,7 +7,7 @@
 			<div class="row">
 				@foreach($recommended_by_sales as $key => $sale)
 				<div class="col-8 offset-2">
-					<a href="{{ route('item.show-expression', $sale->id) }}">
+					<a href="{{ route('item.show-expressions', $sale->id) }}">
 						<div class="block block-bordered block-rounded block-fx-shadow">
 							<div class="block-header bg-primary">
 								<h3 class="block-title font-w700">{{ $key }}</h3>
