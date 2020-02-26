@@ -15,8 +15,9 @@
 <script src="{{asset('js/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 {{-- block loader ui --}}
 <script src="{{asset('js/plugins/jquery.blockUI.js')}}"></script>
+<script src="{{asset('js/plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
 {{-- sweet alert dialog --}}
 <script src="{{asset('js/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 {{-- END PLUGINS --}}
-<script>jQuery(function(){ Dashmix.helpers('notify'); });</script>
+<script>jQuery(function(){ Dashmix.helpers(['notify', 'sparkline']); });</script>
 <script src="{{asset('js/custom.js')}}"></script>

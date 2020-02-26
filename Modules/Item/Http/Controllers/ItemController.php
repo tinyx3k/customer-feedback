@@ -9,6 +9,7 @@ use DB;
 use Modules\Item\Entities\Item;
 use Modules\Item\Entities\ItemCategory;
 use App\Expression;
+use Carbon\Carbon;
 
 class ItemController extends Controller
 {
@@ -152,7 +153,26 @@ class ItemController extends Controller
             $dominant_expression = array_search($this->getClosest(1, $single_exp_arr), $single_exp_arr);
             $expression->dominant = $dominant_expression;
         }
-        return view('item::dominant', compact('item', 'dominant', 'expressions'));
+        $weeks = $expressions->groupBy(function($q) {
+            return Carbon::parse($q->created_at)->format('W');
+        })->toArray();
+        ksort($weeks);
+        $formatted_graph_data = [];
+        foreach ($weeks as $key => $value) {
+            $formatted_graph_data[] = [
+                $key, count($value)
+            ];
+        }
+        $totals = [];
+        foreach ($formatted_graph_data as $v) {
+            $totals[] = $v[1];
+        }
+        $a = array_filter($totals);
+        $average = array_sum($a)/count($a);
+        $formatted_graph_data[] = [
+            'Projected Sales Next Week', $average,
+        ];
+        return view('item::dominant', compact('item', 'dominant', 'expressions', 'formatted_graph_data'));
     }
 
     private function getClosest($search, $arr){
@@ -175,5 +195,78 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         return view('item::question', compact('item'));
+    }
+
+    public function predictionIndex()
+    {
+        $predictions = ItemCategory::with(['items' => function($q){
+            $q->with('expressions')->withCount('expressions')->orderBy('expressions_count', 'desc');
+        }])->get();
+        $recommended_by_sales = [];
+        $recommended_by_expression = [];
+        foreach ($predictions as $prediction) {
+            $recommended_by_sales[$prediction->name] = $prediction->items->first();
+            foreach ($prediction->items as $item) {
+                $expressions = $item->expressions; 
+                $exp_arr = [
+                    'Neutral' => $expressions->avg('neutral_score'),
+                    'Happy' => $expressions->avg('happy_score'),
+                    'Sad' => $expressions->avg('sad_score'),
+                    'Angry' => $expressions->avg('angry_score'),
+                    'Fearful' => $expressions->avg('fearful_score'),
+                    'Disgusted' => $expressions->avg('disgusted_score'),
+                    'Surprised' => $expressions->avg('surprised_score'),
+                ];
+                $item->neutral_score = abs($expressions->avg('neutral_score'));
+                $item->happy_score = abs($expressions->avg('happy_score'));
+                $item->sad_score = abs($expressions->avg('sad_score'));
+                $item->angry_score = abs($expressions->avg('angry_score'));
+                $item->fearful_score = abs($expressions->avg('fearful_score'));
+                $item->disgusted_score = abs($expressions->avg('disgusted_score'));
+                $item->surprised_score = abs($expressions->avg('surprised_score'));
+                $item->dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
+            }
+            $recommended_by_expression[$prediction->name] = $prediction->items->where('dominant', 'Happy')->first();
+        }
+        return view('item::prediction.index', compact('recommended_by_sales', 'recommended_by_expression'));
+    }
+
+    public function predictionWeeklySales()
+    {
+        return view('item::prediction.weekly', compact('predictions'));
+    }
+
+    public function customerRecommended()
+    {
+        $predictions = ItemCategory::with(['items' => function($q){
+            $q->with('expressions')->withCount('expressions')->orderBy('expressions_count', 'desc');
+        }])->get();
+        $recommended_by_sales = [];
+        $recommended_by_expression = [];
+        foreach ($predictions as $prediction) {
+            $recommended_by_sales[$prediction->name] = $prediction->items->first();
+            foreach ($prediction->items as $item) {
+                $expressions = $item->expressions; 
+                $exp_arr = [
+                    'Neutral' => $expressions->avg('neutral_score'),
+                    'Happy' => $expressions->avg('happy_score'),
+                    'Sad' => $expressions->avg('sad_score'),
+                    'Angry' => $expressions->avg('angry_score'),
+                    'Fearful' => $expressions->avg('fearful_score'),
+                    'Disgusted' => $expressions->avg('disgusted_score'),
+                    'Surprised' => $expressions->avg('surprised_score'),
+                ];
+                $item->neutral_score = abs($expressions->avg('neutral_score'));
+                $item->happy_score = abs($expressions->avg('happy_score'));
+                $item->sad_score = abs($expressions->avg('sad_score'));
+                $item->angry_score = abs($expressions->avg('angry_score'));
+                $item->fearful_score = abs($expressions->avg('fearful_score'));
+                $item->disgusted_score = abs($expressions->avg('disgusted_score'));
+                $item->surprised_score = abs($expressions->avg('surprised_score'));
+                $item->dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
+            }
+            $recommended_by_expression[$prediction->name] = $prediction->items->where('dominant', 'Happy')->first();
+        }
+        return view('item::customer.recommended', compact('recommended_by_sales', 'recommended_by_expression'));
     }
 }

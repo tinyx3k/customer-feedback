@@ -97,6 +97,30 @@
                     @endability
                 </ul>
             </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                    <i class="nav-main-link-icon si si-bar-chart"></i>
+                    <span class="nav-main-link-name">Predictive Analysis</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    @ability('Super Admin', 'view_user')
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('prediction.index') }}">
+                            <i class="nav-main-link-icon si si-bar-chart"></i>
+                            <span class="nav-main-link-name">By Sales and Expression</span>
+                        </a>
+                    </li>
+                    @endability
+                    @ability('Super Admin', 'view_role')
+                    {{-- <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('prediction.weekly.sales') }}">
+                            <i class="nav-main-link-icon si si-bar-chart"></i>
+                            <span class="nav-main-link-name">Weekly Sales Prediction</span>
+                        </a>
+                    </li> --}}
+                    @endability
+                </ul>
+            </li>
             @endability
             <li class="nav-main-heading">Personal</li>
             <li class="nav-main-item">

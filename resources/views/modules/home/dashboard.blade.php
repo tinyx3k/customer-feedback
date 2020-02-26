@@ -50,9 +50,9 @@
 @elseif(auth()->user()->hasRole('Customer'))
 <div class="row justify-content-center">
     <div class="col-lg-12 col-12 col-md-12 text-center">
-        <h1>Do you with to take a quick survey of our products? It will just take around 10-20 seconds of your time.</h1>
+        <h1>Do you wish to take a quick survey of our products? It will just take around 10-20 seconds of your time.</h1>
         <a href="{{ route('item.menu') }}" class="btn btn-lg btn-success btn-block">Yes! Proceed to Survey!</a>
-        <a href="{{ route('item.menu') }}" class="btn btn-warning btn-lg btn-block">View Recommended Products Instead.</a>
+        <a href="{{ route('item.customer.recommended') }}" class="btn btn-warning btn-lg btn-block">View Recommended Products Instead.</a>
     </div>
 </div>
 @else

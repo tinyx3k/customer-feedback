@@ -15,5 +15,6 @@ class Expression extends Model
     	'fearful_score',
     	'disgusted_score',
     	'surprised_score',
+        'created_at',
     ];
 }
