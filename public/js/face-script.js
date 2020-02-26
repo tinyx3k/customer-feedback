@@ -27,7 +27,7 @@ video.addEventListener('playing', () => {
     canvas.style.top = rect.top;
     canvas.style.left = rect.left;
     faceapi.matchDimensions(canvas, displaySize);
-    setInterval(async() => {
+    var loopVideo = setInterval(async() => {
         const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
@@ -44,6 +44,7 @@ video.addEventListener('playing', () => {
         document.getElementById('surprised_score').value = arrExp.surprised;
         if (typeof resizedDetections[0].expressions !== 'undefined') {
             $('#exp-form').submit();
+            clearInterval(loopVideo);
         }
     }, 500)
 });
