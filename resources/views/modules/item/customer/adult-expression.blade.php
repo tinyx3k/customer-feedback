@@ -35,7 +35,7 @@
     	<div class="col-lg-12 text-center" id="video-container">
     		<h3 class="content-heading p-0 m-0"><i class="far fa-smile mr-1"></i><i class="far fa-sad-tear mr-1"></i><i class="far fa-surprise mr-1"></i><i class="far fa-frown mr-1"></i><i class="far fa-angry mr-1"></i><i class="far fa-dizzy mr-1"></i><i class="far fa-meh-rolling-eyes mr-1"></i></h3>
             <video id="video" width="200" height="150" autoplay muted></video>
-    		<form action="{{ route('item.kids.recommended') }}" id="exp-form" method="POST">
+    		<form action="{{ route('item.adult.recommended') }}" id="exp-form" method="POST">
     			@csrf
     			<input type="hidden" id="neutral_score" name="neutral_score" required>
     			<input type="hidden" id="happy_score" name="happy_score" required>
