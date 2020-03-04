@@ -119,7 +119,7 @@ class UsersTableSeeder extends Seeder
         $item_cold_drinks = [
             0 => [
                 'name' => 'Iced Caffe Americano',
-                'image' => 'cold-caffee_americano.png',
+                'image' => 'cold-caffe_americano.png',
                 'category_id' => $cold_drinks->id,
                 'price' => 100,
             ],

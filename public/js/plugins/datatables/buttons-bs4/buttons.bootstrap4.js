@@ -53,10 +53,16 @@ $.extend( true, DataTable.Buttons.defaults, {
 				disabled: 'disabled'
 			}
 		}
+	},
+	buttonCreated: function ( config, button ) {
+		return config.buttons ?
+			$('<div class="btn-group"/>').append(button) :
+			button;
 	}
 } );
 
 DataTable.ext.buttons.collection.className += ' dropdown-toggle';
+DataTable.ext.buttons.collection.rightAlignClassName = 'dropdown-menu-right';
 
 return DataTable.Buttons;
 }));

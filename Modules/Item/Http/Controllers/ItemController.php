@@ -269,4 +269,162 @@ class ItemController extends Controller
         }
         return view('item::customer.recommended', compact('recommended_by_sales', 'recommended_by_expression'));
     }
+
+    public function kidsQuestion()
+    {
+        return view('item::customer.kids-question');
+    }
+
+    public function kidsGetExpression()
+    {
+        return view('item::customer.kids-expression');
+    }
+
+    public function kidsRecommended(Request $request)
+    {
+        $data = $request->all();
+        // dd($data);
+        $predictions = ItemCategory::with(['items' => function($q){
+            $q->with('expressions')->withCount('expressions')->orderBy('expressions_count', 'desc');
+        }])->get();
+        $exp_arr = [
+            'Neutral' => $data['neutral_score'],
+            'Happy' => $data['happy_score'],
+            'Sad' => $data['sad_score'],
+            'Angry' => $data['angry_score'],
+            'Fearful' => $data['fearful_score'],
+            'Disgusted' => $data['disgusted_score'],
+            'Surprised' => $data['surprised_score'],
+        ];
+        $dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
+        $exp_to_query = 'Happy';
+        switch ($dominant) {
+            case 'Neutral':
+                $exp_to_query = 'Surprised';
+                break;
+            case 'Happy':
+                $exp_to_query = 'Happy';
+                break;
+            case 'Sad':
+                $exp_to_query = 'Happy';
+                break;
+            case 'Angry':
+                $exp_to_query = 'Neutral';
+                break;
+            case 'Fearful':
+                $exp_to_query = 'Happy';
+                break;
+            case 'Disgusted':
+                $exp_to_query = 'Happy';
+                break;
+            case 'Surprised':
+                $exp_to_query = 'Happy';
+                break;
+            default:
+                $exp_to_query = 'Happy';
+                break;
+        }
+        $recommended_by_expression = [];
+        foreach ($predictions as $k => $prediction) {
+            $recommended_by_sales[$prediction->name] = $prediction->items->first();
+            foreach ($prediction->items as $item) {
+                $expressions = $item->expressions; 
+                $item->neutral_score = abs($expressions->avg('neutral_score'));
+                $item->happy_score = abs($expressions->avg('happy_score'));
+                $item->sad_score = abs($expressions->avg('sad_score'));
+                $item->angry_score = abs($expressions->avg('angry_score'));
+                $item->fearful_score = abs($expressions->avg('fearful_score'));
+                $item->disgusted_score = abs($expressions->avg('disgusted_score'));
+                $item->surprised_score = abs($expressions->avg('surprised_score'));
+                $item->dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
+            }
+            $prediction_items = $prediction->items->where('dominant', $exp_to_query);
+            if($prediction_items->count() > 0){
+                $recommended_by_expression[$prediction->name] = $prediction_items->last();
+            }else{
+                $recommended_by_expression[$prediction->name] = [];
+            }
+        }
+        // dd($recommended_by_expression);
+        return view('item::customer.kids-recommended', compact('recommended_by_sales', 'recommended_by_expression'));
+    }
+
+    public function adultQuestion()
+    {
+        return view('item::customer.adult-question');
+    }
+
+    public function adultGetExpression()
+    {
+        return view('item::customer.adult-expression');
+    }
+
+    public function adultRecommended(Request $request)
+    {
+        $data = $request->all();
+        // dd($data);
+        $predictions = ItemCategory::with(['items' => function($q){
+            $q->with('expressions')->withCount('expressions')->orderBy('expressions_count', 'desc');
+        }])->get();
+        $exp_arr = [
+            'Neutral' => $data['neutral_score'],
+            'Happy' => $data['happy_score'],
+            'Sad' => $data['sad_score'],
+            'Angry' => $data['angry_score'],
+            'Fearful' => $data['fearful_score'],
+            'Disgusted' => $data['disgusted_score'],
+            'Surprised' => $data['surprised_score'],
+        ];
+        $dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
+        $exp_to_query = 'Happy';
+        switch ($dominant) {
+            case 'Neutral':
+                $exp_to_query = 'Surprised';
+                break;
+            case 'Happy':
+                $exp_to_query = 'Happy';
+                break;
+            case 'Sad':
+                $exp_to_query = 'Happy';
+                break;
+            case 'Angry':
+                $exp_to_query = 'Neutral';
+                break;
+            case 'Fearful':
+                $exp_to_query = 'Happy';
+                break;
+            case 'Disgusted':
+                $exp_to_query = 'Happy';
+                break;
+            case 'Surprised':
+                $exp_to_query = 'Happy';
+                break;
+            default:
+                $exp_to_query = 'Happy';
+                break;
+        }
+        $recommended_by_expression = [];
+        foreach ($predictions as $k => $prediction) {
+            $recommended_by_sales[$prediction->name] = $prediction->items->first();
+            foreach ($prediction->items as $item) {
+                $expressions = $item->expressions; 
+                $item->neutral_score = abs($expressions->avg('neutral_score'));
+                $item->happy_score = abs($expressions->avg('happy_score'));
+                $item->sad_score = abs($expressions->avg('sad_score'));
+                $item->angry_score = abs($expressions->avg('angry_score'));
+                $item->fearful_score = abs($expressions->avg('fearful_score'));
+                $item->disgusted_score = abs($expressions->avg('disgusted_score'));
+                $item->surprised_score = abs($expressions->avg('surprised_score'));
+                $item->dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
+            }
+            $prediction_items = $prediction->items->where('dominant', $exp_to_query);
+            if($prediction_items->count() > 0){
+                $recommended_by_expression[$prediction->name] = $prediction_items->first();
+            }else{
+                $recommended_by_expression[$prediction->name] = [];
+            }
+        }
+        // dd($recommended_by_expression);
+        return view('item::customer.adult-recommended', compact('recommended_by_sales', 'recommended_by_expression'));
+    }
 }
