@@ -403,12 +403,21 @@ class ItemController extends Controller
                 $exp_to_query = 'Happy';
                 break;
         }
-        dd($exp_to_query);
+        // dd($exp_to_query);
         $recommended_by_expression = [];
         foreach ($predictions as $k => $prediction) {
             $recommended_by_sales[$prediction->name] = $prediction->items->first();
             foreach ($prediction->items as $item) {
                 $expressions = $item->expressions; 
+                $exp_arr_second = [
+                    'Neutral' => $expressions->avg('neutral_score'),
+                    'Happy' => $expressions->avg('happy_score'),
+                    'Sad' => $expressions->avg('sad_score'),
+                    'Angry' => $expressions->avg('angry_score'),
+                    'Fearful' => $expressions->avg('fearful_score'),
+                    'Disgusted' => $expressions->avg('disgusted_score'),
+                    'Surprised' => $expressions->avg('surprised_score'),
+                ];
                 $item->neutral_score = abs($expressions->avg('neutral_score'));
                 $item->happy_score = abs($expressions->avg('happy_score'));
                 $item->sad_score = abs($expressions->avg('sad_score'));
@@ -416,9 +425,10 @@ class ItemController extends Controller
                 $item->fearful_score = abs($expressions->avg('fearful_score'));
                 $item->disgusted_score = abs($expressions->avg('disgusted_score'));
                 $item->surprised_score = abs($expressions->avg('surprised_score'));
-                $item->dominant = array_search($this->getClosest(1, $exp_arr), $exp_arr);
+                $item->dominant = array_search($this->getClosest(1, $exp_arr_second), $exp_arr_second);
             }
             $prediction_items = $prediction->items->where('dominant', $exp_to_query);
+            
             if($prediction_items->count() > 0){
                 $recommended_by_expression[$prediction->name] = $prediction_items->first();
             }else{
