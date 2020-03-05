@@ -403,7 +403,7 @@ class ItemController extends Controller
                 $exp_to_query = 'Happy';
                 break;
         }
-        // dd($exp_to_query);
+        dd($exp_to_query);
         $recommended_by_expression = [];
         foreach ($predictions as $k => $prediction) {
             $recommended_by_sales[$prediction->name] = $prediction->items->first();
