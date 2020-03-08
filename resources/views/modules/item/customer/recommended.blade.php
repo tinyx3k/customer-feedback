@@ -3,7 +3,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-12 text-center">
-			<a href="{{ route('dashboard') }}" class="btn-block btn-lg btn-warning">Go Back To Home Screen</a>
+			<a href="{{ route('dashboard') }}" class="btn-block btn-lg btn-warning {{ auth()->user()->email == 'customer@customer.com' ?: 'd-none' }}">Go Back To Home Screen</a>
 			<h3 class="content-heading font-w700">Best Sellers</h3>
 			<div class="row">
 				@foreach($recommended_by_sales as $key => $sale)
