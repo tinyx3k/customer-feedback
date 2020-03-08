@@ -37,7 +37,7 @@
         </a>
     </div>
     <div class="col-6 col-lg-6 col-md-6">
-        <a href="{{ route('item.menu') }}" class="block block-rounded block-fx-shadow block-bordered text-center bg-gd-lake">
+        <a href="{{ route('item.customer.recommended') }}" class="block block-rounded block-fx-shadow block-bordered text-center bg-gd-lake">
             <div class="block-content block-content-full aspect-ratio-16-9 d-flex justify-content-center align-items-center">
                 <div>
                     <div class="font-size-h1 font-w300 text-white"><i class="fa fa-star fa-fw"></i></div>
