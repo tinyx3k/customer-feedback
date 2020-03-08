@@ -41,7 +41,7 @@
             <div class="block-content block-content-full aspect-ratio-16-9 d-flex justify-content-center align-items-center">
                 <div>
                     <div class="font-size-h1 font-w300 text-white"><i class="fa fa-star fa-fw"></i></div>
-                    <div class="font-w600 mt-2 text-uppercase text-white-75">Recommended&nbsp;Products</div>
+                    <div class="font-w600 mt-2 text-uppercase text-white-75">Recommended Products</div>
                 </div>
             </div>
         </a>
