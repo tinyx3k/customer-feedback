@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Ingredients</label>
-                                    <input type="text" class="form-control" name="ingredients" value="{{ $item->ingredients }}" required>
+                                    <input type="text" class="form-control" name="ingredients" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Actual Item Price</label>
