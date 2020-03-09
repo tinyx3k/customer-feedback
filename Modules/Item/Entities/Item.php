@@ -17,6 +17,7 @@ class Item extends Model
         'image',
         'price',
         'category_id',
+        'ingredients',
     ];
 
     public function expressions()

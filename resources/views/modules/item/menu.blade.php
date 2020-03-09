@@ -17,7 +17,7 @@
                         <div class="row">
                             @foreach($category->items as $item)
                             <div class="col-6 col-lg-4 col-md-4">
-                                <a href="{{ auth()->user()->email == 'admin@admin.com' ? 'javascript:void(0);' : route('item.question', $item->id) }}" class="block block-rounded block-fx-shadow block-bordered text-center bg-primary-op">
+                                <a href="{{ auth()->user()->email == 'admin@admin.com' ? 'javascript:void(0);' : route('item.question', $item->id) }}" class="block block-rounded block-fx-shadow block-bordered text-center bg-primary-op" {{ auth()->user()->email == 'admin@admin.com' ? 'data-toggle=modal data-target=#modal-'.$item->id : '' }}>
                                     <div class="block-content block-content-full aspect-ratio-1-1 d-flex justify-content-center align-items-center">
                                         <div>
                                             <div class="font-size-h1 font-w300 text-white"><img src="{{ asset('/') .'img/item_images/'. $item->image }}" alt="{{ $item->name }}" class="img-avatar img-avatar96"></div>
@@ -25,6 +25,39 @@
                                         </div>
                                     </div>
                                 </a>
+                            </div>
+                            <div class="modal" id="modal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-{{ $item->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="block block-themed block-transparent mb-0">
+                                            <div class="block-header bg-primary-dark">
+                                                <h3 class="block-title">{{$item->name}}</h3>
+                                                <div class="block-options">
+                                                    <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                                    <i class="fa fa-fw fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="block-content">
+                                                <h2>Ingredients</h2>
+                                                <div class="bordered rounded">
+                                                    @php
+                                                    $ingredients = explode(',', $item->ingredients)
+                                                    @endphp
+                                                    <ul>
+                                                    @foreach($ingredients as $ingredient)
+                                                    <li>{{ $ingredient }}</li>
+                                                    @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="block-content block-content-full text-right bg-light">
+                                                <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Done</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             @endforeach
                         </div>

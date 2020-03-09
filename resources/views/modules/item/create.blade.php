@@ -29,6 +29,10 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>Ingredients</label>
+                                    <input type="text" class="form-control" name="ingredients" value="{{ $item->ingredients }}" required>
+                                </div>
+                                <div class="form-group">
                                     <label>Actual Item Price</label>
                                     <input type="text" class="form-control" name="price" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                                 </div>

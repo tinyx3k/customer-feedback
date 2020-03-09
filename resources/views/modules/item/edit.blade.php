@@ -33,6 +33,10 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>Ingredients</label>
+                                    <input type="text" class="form-control" name="ingredients" value="{{ $item->ingredients }}">
+                                </div>
+                                <div class="form-group">
                                     <label>Actual Item Price</label>
                                     <input type="text" class="form-control" name="price" value="{{ $item->price }}">
                                 </div>
